@@ -8,7 +8,7 @@ const IndexScreen = ({navigation}) => {
     const { state ,addBlogPosts,deleteBlogPost} = useContext( Context);
   return (
     <View>
-      <Button title='add Blog' onPress={addBlogPosts}/>
+      
       <FlatList 
 
       data={state}
