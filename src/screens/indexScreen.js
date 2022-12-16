@@ -3,12 +3,11 @@ import React,{useContext} from 'react';
 import { Context } from '../context/BlogContext';
 import { FontAwesome } from '@expo/vector-icons'; 
 
-const indexScreen = ({navigation}) => {
+const IndexScreen = ({navigation}) => {
 
     const { state ,addBlogPosts,deleteBlogPost} = useContext( Context);
   return (
     <View>
-      <Text style={styles.title}>indexScreen</Text>
       <Button title='add Blog' onPress={addBlogPosts}/>
       <FlatList 
 
@@ -36,14 +35,17 @@ const indexScreen = ({navigation}) => {
     </View>
   )
 }
+IndexScreen.navigationOptions= ({ navigation })=>{
+  return {
+    headerRight: () => (
+      <TouchableOpacity style={{width:40}} onPress={() => navigation.navigate('Create')}>
+        <FontAwesome name="plus" size={20} />
+      </TouchableOpacity>
+    ),
+  };
+}
 const styles = StyleSheet.create({
-  title:{
-    fontSize:17,
-    color:'#AE892C',
-    fontWeight:'bold',
-    marginLeft:20,
-    padding:10,
-  },
+ 
   blog:{
     
     margin:3,
@@ -62,5 +64,5 @@ const styles = StyleSheet.create({
   }
 })
 
-export default indexScreen
+export default IndexScreen
 
