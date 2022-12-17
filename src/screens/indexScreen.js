@@ -12,7 +12,7 @@ const IndexScreen = ({navigation}) => {
       <FlatList 
 
       data={state}
-      keyExtractor={(blogPost)=>blogPost.id}
+      keyExtractor={(blogPost)=>Math.random ()* 9999}
       renderItem={( {item} )=> {
        return (
         <TouchableOpacity

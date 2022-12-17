@@ -1,9 +1,6 @@
 import React,{useReducer} from 'react';
 import crateContextBlog from './crateContextBlog';
 
-
-
-
 const blogReducer = (state, action)=>{
     switch (action.type){
         case 'add_blogpost':
@@ -12,8 +9,8 @@ const blogReducer = (state, action)=>{
                  content: action.payload.content,
                 
                 }];
-
-        
+                
+    
 
         case 'delete_blogPost':
             return state.filter((blogPost)=> blogPost.id !== action.payload);
@@ -25,7 +22,7 @@ const blogReducer = (state, action)=>{
 };
 const addBlogPosts =(dispatch)=>{
     return (title, content, callback)=> {
-        dispatch({type:'add_blogpost' , payload:{ title:title, content: content}} ),
+        dispatch({type:'add_blogpost' , payload:{title:title, content: content}} )
         callback()
     };
   
@@ -39,5 +36,5 @@ const deleteBlogPost =(dispatch)=>{
 export const {Context,Provider} = crateContextBlog(
         blogReducer,
         {addBlogPosts,deleteBlogPost},
-        []
+        [ {id :2, title:'new title', content:'hello by'}]
 );
