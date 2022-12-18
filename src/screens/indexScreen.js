@@ -7,7 +7,7 @@ const IndexScreen = ({navigation}) => {
 
     const { state ,addBlogPosts,deleteBlogPost} = useContext( Context);
   return (
-    <View>
+    <View >
       
       <FlatList 
 
@@ -45,6 +45,8 @@ IndexScreen.navigationOptions= ({ navigation })=>{
   };
 }
 const styles = StyleSheet.create({
+
+
  
   blog:{
     

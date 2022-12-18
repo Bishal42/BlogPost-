@@ -10,8 +10,8 @@ const CreateScreen = ({navigation}) => {
   return (
   
   <BlogForm 
-    onSubmit = {(id, title, content)=>{
-       addBlogPosts( id, title, content , ()=>{
+    onSubmit = {( title, content)=>{
+       addBlogPosts( title, content , ()=>{
        navigation.navigate('Index')
       })
     }}

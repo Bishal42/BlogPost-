@@ -10,11 +10,21 @@ const ShowScreen = ({navigation}) => {
    const blogPost = state.find((blogPost)=> blogPost.id === id);
   return (
     <View>  
-      <Text>{blogPost.title}</Text>
+      <Text>{blogPost.title }, {blogPost.id}</Text>
       <Text>{blogPost.content}</Text>
     </View>
   )
 }
+ShowScreen.navigationOptions= ({ navigation })=>{
+  return {
+    headerRight: () => (
+      <TouchableOpacity style={{width:40}} onPress={() => navigation.navigate('Edit', {id: navigation.getParam('id')})}>
+        <FontAwesome name="edit" size={20} />
+      </TouchableOpacity>
+    ),
+  };
+}
+
 
 
 export default ShowScreen

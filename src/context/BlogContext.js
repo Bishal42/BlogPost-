@@ -9,6 +9,16 @@ const blogReducer = (state, action)=>{
                  content: action.payload.content,
                 
                 }];
+        case 'edit_blogPost':
+            return state.map((blogPost)=>{
+                if (blogPost.id===action.payload.id){
+                    
+                    return action.payload;
+                }
+                else{
+                    return blogPost
+                }
+            })
                 
     
 
@@ -23,7 +33,9 @@ const blogReducer = (state, action)=>{
 const addBlogPosts =(dispatch)=>{
     return (title, content, callback)=> {
         dispatch({type:'add_blogpost' , payload:{title:title, content: content}} )
+        if(callback){
         callback()
+        }
     };
   
 };
@@ -32,9 +44,18 @@ const deleteBlogPost =(dispatch)=>{
         dispatch( {type: 'delete_blogPost', payload:id})
     };
 }
+const editBlogPost = (dispatch)=>{
+    return(id, title, content, callback) =>{
+        dispatch( {type: 'edit_blogPost', payload:{id:id, title:title, content: content}} )
+        
+        if(callback) {
+            callback();
+        }
+    }
+};
 
 export const {Context,Provider} = crateContextBlog(
         blogReducer,
-        {addBlogPosts,deleteBlogPost},
+        {addBlogPosts,deleteBlogPost, editBlogPost},
         [ {id :2, title:'new title', content:'hello by'}]
 );
