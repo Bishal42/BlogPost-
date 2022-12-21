@@ -7,9 +7,15 @@ const IndexScreen = ({navigation}) => {
 
     const { state ,addBlogPosts,deleteBlogPost,getBlogPosts} = useContext( Context);
 
-    useEffect(()=>{
+  useEffect(()=>{
       getBlogPosts()
-    },[])
+      const listener = navigation.addListener( 'didFocus',()=>{
+        getBlogPosts();
+      });
+      return()=>{
+        listener.remove();// thsi remove the listener functio when the screen is not display 
+      }
+    },[]);
 
   return (
     <View >
