@@ -1,8 +1,12 @@
 import React,{useReducer} from 'react';
 import crateContextBlog from './crateContextBlog';
+import jsonServer from '../api/jsonServer';
 
 const blogReducer = (state, action)=>{
     switch (action.type){
+        case 'get_blogPost':
+            return action.payload;
+
         case 'add_blogpost':
             return [...state,{id: (Math.random() *99999),
                  title: action.payload.title,
@@ -30,6 +34,13 @@ const blogReducer = (state, action)=>{
 
     }
 };
+const getBlogPosts = (dispatch) =>{
+    return async()=>{
+      const response =   await jsonServer.get("/blogPosts")
+      dispatch({ type:'get_blogPost', payload:(response.data)})
+    }
+};
+
 const addBlogPosts =(dispatch)=>{
     return (title, content, callback)=> {
         dispatch({type:'add_blogpost' , payload:{title:title, content: content}} )
@@ -56,6 +67,6 @@ const editBlogPost = (dispatch)=>{
 
 export const {Context,Provider} = crateContextBlog(
         blogReducer,
-        {addBlogPosts,deleteBlogPost, editBlogPost},
-        [ {id :2, title:'new title', content:'hello by'}]
+        {addBlogPosts,deleteBlogPost, editBlogPost,getBlogPosts},
+        [ ]
 );
